@@ -1,6 +1,18 @@
 const lessonBtnContainer = document.getElementById("lesson-btn-container");
 const wordsContainer = document.getElementById("words-container");
 
+// showing loader
+const showingLoader = () => {
+  document.getElementById("loader").classList.remove("hidden");
+  document.getElementById("vocabularies").classList.add("hidden");
+};
+
+// hiding loader
+const hidingLoader = () => {
+  document.getElementById("loader").classList.add("hidden");
+  document.getElementById("vocabularies").classList.remove("hidden");
+};
+
 // login functionality
 const submitLogin = () => {
   const nameField = document.getElementById("name-field").value.trim();
@@ -85,6 +97,7 @@ const removeActiveClass = () => {
 
 //getting words by button level and active class functionality
 const gettingWordsByLevel = (levelId) => {
+  showingLoader();
   fetch(`https://openapi.programming-hero.com/api/level/${levelId}`)
     .then((res) => res.json())
     .then((data) => {
@@ -103,9 +116,41 @@ const loadingWordDetails = (wordId) => {
 };
 
 const displayWordDetails = (wordData) => {
+  console.log(wordData);
   document.getElementById("word_details").showModal();
   const wordDetailsCard = document.getElementById("modal-container");
-  // wordDetailsCard.innerHTML = ``;
+  wordDetailsCard.innerHTML = "";
+  const wordDetailsDiv = document.createElement("div");
+  wordDetailsDiv.innerHTML = `
+        <h3 class="text-2xl mb-4 font-bold">${
+          wordData.word
+        } (<i class="fa-solid fa-microphone"></i>: ${
+    wordData.pronunciation
+  })</h3>
+            <p class="py-1 text-lg font-bold">Meaning</p>
+            <p class="py-1 font2"> ${
+              wordData.meaning === null ? "অর্থ নেই" : wordData.meaning
+            } </p>
+            <p class="pt-5  text-lg font-bold">Example</p>
+            <p class="py-1 "> ${wordData.sentence} </p>
+            <p class="pt-5  text-lg font-bold font2">সমার্থক শব্দ গুলো</p>
+
+            ${wordData.synonyms
+              .map(
+                (word) => `
+            <div class="badge badge-md badge-accent"> ${word} </div>
+            `
+              )
+              .join("")}
+            
+            <div class="modal-action card-actions justify-start">
+                <form method="dialog" class="">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary">Complete Learning</button>
+                </form>
+            </div>
+    `;
+  wordDetailsCard.append(wordDetailsDiv);
 };
 
 // listen words sound
@@ -154,6 +199,7 @@ const displayWordsByLevel = (words) => {
     `;
     wordsContainer.append(wordsCardDiv);
   }
+  hidingLoader();
 };
 
 loadingLessonsLevel();

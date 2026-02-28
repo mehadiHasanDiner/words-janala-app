@@ -96,8 +96,11 @@
     </section>
 
     <!-- learn vocabularies section  -->
+    <section id="loader" class="text-center py-20 hidden">
+        <span class="loading loading-bars loading-xl"></span>
+    </section>
 
-    <section id="vocabularies" class="my-36 w-11/12 mx-auto ">
+    <section id="vocabularies" class="my-36 w-11/12 mx-auto hidden">
         <div class=" text-center space-y-5">
             <h2 class="font-bold text-2xl"> <span class=" text-[#00BCFF]">Let's</span> Learn Vocabularies</h2>
             <div id="lesson-btn-container" class="lesson-button">
@@ -172,20 +175,9 @@
     <!-- <button class="btn" onclick="word_details.showModal()">open modal</button> -->
     <dialog id="word_details" class="modal">
         <div id="modal-container" class="modal-box">
-            <h3 class="text-2xl mb-4 font-bold">Eager (<i class="fa-solid fa-microphone"></i>: ইগার)</h3>
-            <p class="py-1 text-lg font-bold">Meaning</p>
-            <p class="py-1 font2"> আগ্রহী </p>
-            <p class="pt-5  text-lg font-bold">Example</p>
-            <p class="py-1 ">The kids were eager to open their gifts</p>
-            <p class="pt-5  text-lg font-bold font2">সমার্থক শব্দ গুলো</p>
-            <div class="badge badge-md badge-accent">Info</div>
+            <!-- word model div -->
 
-            <div class="modal-action card-actions justify-start">
-                <form method="dialog" class="">
-                    <!-- if there is a button in form, it will close the modal -->
-                    <button class="btn btn-primary">Complete Learning</button>
-                </form>
-            </div>
+
         </div>
     </dialog>
 
