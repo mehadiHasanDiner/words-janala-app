@@ -18,13 +18,17 @@
     <script src="https://kit.fontawesome.com/97b3c9072b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style/style.css">
 
-
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 
 <body>
-    <header id="header-container" class="hidden">
-        <nav class="bg-gradient-to-b to-gray-300 shadow-sm border-b-2 border-[#C6BDBD]">
+    <header id="header" class="hidden">
+        <nav class="bg-gradient-to-b to-gray-300 shadow-sm border-b-2 border-[#C6BDBD] fixed top-0 z-10 w-full ">
             <div class="navbar p-0 w-11/12 mx-auto">
                 <div class="navbar-start">
                     <div class="dropdown">
@@ -35,11 +39,15 @@
                                     d="M4 6h16M4 12h8m-8 6h16" />
                             </svg>
                         </div>
+                        <!-- mobile view -->
                         <ul tabindex="-1"
                             class="menu menu-sm dropdown-content bg-gradient-to-b to-gray-300 rounded-box z-1 mt-5 w-52 p-2 shadow space-y-3">
-                            <li><a><span><i class="fa-regular fa-circle-question"></i></span> FAQ</a></li>
-                            <li><a><span><i class="fa-solid fa-book-open"></i></span> Learn</a></li>
-                            <li><a><span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Logout</a></li>
+                            <li><a href="#faq"><span><i class="fa-regular fa-circle-question"></i></span>
+                                    FAQ</a></li>
+                            <li><a href="#vocabularies"><span><i class="fa-solid fa-book-open"></i></span> Learn</a>
+                            </li>
+                            <li><a onclick="submitLogout()"><span><i
+                                            class="fa-solid fa-arrow-right-from-bracket"></i></span> Logout</a></li>
                         </ul>
                     </div>
                     <div class="flex items-center justify-center text-xl">
@@ -49,12 +57,14 @@
                     </div>
                 </div>
                 <div class="navbar-end hidden md:flex">
+                    <!-- normal view -->
                     <ul class="menu menu-horizontal px-1 ">
-                        <li><button class="btn btn-outline btn-primary mr-3"> <i
-                                    class="fa-regular fa-circle-question"></i>FAQ</button></li>
-                        <li><button class="btn btn-outline btn-primary mr-3"> <i class="fa-solid fa-book-open"></i>
-                                Learn</button></li>
-                        <li><button class="btn btn-outline btn-primary"> <i
+                        <li><a href="#faq" class=" btn btn-outline btn-primary mr-3"> <i
+                                    class="fa-regular fa-circle-question"></i>FAQ</a></li>
+                        <li><a href="#vocabularies" class="btn btn-outline btn-primary mr-3"> <i
+                                    class="fa-solid fa-book-open"></i>
+                                Learn</a></li>
+                        <li><button onclick="submitLogout()" class="btn btn-outline btn-primary"> <i
                                     class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button></li>
                     </ul>
                 </div>
@@ -64,7 +74,7 @@
     </header>
 
     <!-- hero section -->
-    <section>
+    <section id="hero">
         <div class="w-11/12 mx-auto flex justify-between items-center py-10 mb-5">
             <div class="hero-text space-y-4">
                 <h2 class="font-bold text-3xl"> <span class=" text-[#00BCFF]">English</span> is Easy!!</h2>
@@ -87,7 +97,7 @@
 
     <!-- learn vocabularies section  -->
 
-    <section id="vocabularies-container" class="mb-36 w-11/12 mx-auto hidden">
+    <section id="vocabularies" class="my-36 w-11/12 mx-auto hidden">
         <div class=" text-center space-y-5">
             <h2 class="font-bold text-2xl"> <span class=" text-[#00BCFF]">Let's</span> Learn Vocabularies</h2>
             <div id="lesson-btn-container" class="lesson-button">
@@ -111,7 +121,7 @@
     </section>
 
     <!-- FAQ section -->
-    <section id="faq-conatiner" class="mb-36 hidden">
+    <section id="faq" class="mb-36 hidden">
         <div class="w-11/12 mx-auto ">
             <div class="text-center mb-10">
                 <h2 class="font-bold text-2xl"> <span class=" text-[#00BCFF]">Frequently </span> Asked Questions</h2>
@@ -191,6 +201,8 @@
 
 
     <script src="./script/index.js"></script>
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -3,9 +3,55 @@ const wordsContainer = document.getElementById("words-container");
 
 // login functionality
 const submitLogin = () => {
-  const nameField = document.getElementById("name-field").value;
-  const passwordField = document.getElementById("password-field").value;
-  console.log(nameField, passwordField);
+  const nameField = document.getElementById("name-field").value.trim();
+  const passwordField = document.getElementById("password-field").value.trim();
+  // যদি name খালি থাকে
+  if (nameField === "") {
+    alert("নাম খালি রাখা যাবে না!");
+    return;
+  }
+
+  // যদি password খালি থাকে
+  if (passwordField === "") {
+    alert("পাসওয়ার্ড খালি রাখা যাবে না!");
+    return;
+  }
+
+  // যদি password ভুল হয়
+  if (passwordField !== "123456") {
+    alert("ভুল পাসওয়ার্ড!");
+    return;
+  }
+
+  // সব ঠিক থাকলে Sweet Alert দেখাবে
+  Swal.fire({
+    title: "Successfully Login!",
+    text: "Welcome " + nameField,
+    icon: "success",
+    confirmButtonText: "OK",
+  }).then(() => {
+    // Hidden section গুলো show হবে
+    document.getElementById("header").style.display = "block";
+    document.getElementById("vocabularies").style.display = "block";
+    document.getElementById("faq").style.display = "block";
+    document.getElementById("hero").style.display = "none";
+  });
+};
+
+const submitLogout = () => {
+  const nameField = document.getElementById("name-field").value.trim();
+  Swal.fire({
+    title: "Logging Out!",
+    text: " Bye Bye " + nameField,
+    icon: "success",
+    confirmButtonText: "OK",
+  }).then(() => {
+    // Hidden section গুলো show হবে
+    document.getElementById("header").style.display = "none";
+    document.getElementById("vocabularies").style.display = "none";
+    document.getElementById("faq").style.display = "none";
+    document.getElementById("hero").style.display = "block";
+  });
 };
 
 // loading lessons button levels
