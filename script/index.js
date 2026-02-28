@@ -95,7 +95,31 @@ const gettingWordsByLevel = (levelId) => {
     });
 };
 
+// show word details
+const loadingWordDetails = (wordId) => {
+  fetch(`https://openapi.programming-hero.com/api/word/${wordId}`)
+    .then((res) => res.json())
+    .then((data) => displayWordDetails(data.data));
+};
+
+const displayWordDetails = (wordData) => {
+  document.getElementById("word_details").showModal();
+  const wordDetailsCard = document.getElementById("modal-container");
+  // wordDetailsCard.innerHTML = ``;
+};
+
+// listen words sound
+const listenPronunciation = (word) => {
+  const msg = new SpeechSynthesisUtterance();
+  msg.text = word;
+  msg.lang = "en-US"; // ভাষা সেট করা (optional but recommended)
+  msg.rate = 0.5;
+  msg.pitch = 1;
+  window.speechSynthesis.speak(msg);
+};
+
 const displayWordsByLevel = (words) => {
+  console.log(words);
   wordsContainer.innerHTML = "";
   if (words.length === 0) {
     wordsContainer.innerHTML = `
@@ -106,6 +130,7 @@ const displayWordsByLevel = (words) => {
             </div>
     `;
   }
+
   for (let word of words) {
     const wordsCardDiv = document.createElement("div");
     wordsCardDiv.innerHTML = `
@@ -117,8 +142,12 @@ const displayWordsByLevel = (words) => {
                       word.meaning === null ? "অর্থ নেই" : word.meaning
                     } / ${word.pronunciation}</p>
                     <div class="card-actions justify-between">
-                        <button class="btn btn-ghost"><i class="fa-solid fa-circle-info"></i></button>
-                        <button class="btn btn-ghost"> <i class="fa-solid fa-volume-high"></i> </button>
+                        <button onclick="loadingWordDetails('${
+                          word.id
+                        }')" class="btn btn-ghost"><i class="fa-solid fa-circle-info"></i></button>
+                        <button onclick="listenPronunciation('${
+                          word.word
+                        }')" class="btn btn-ghost"> <i class="fa-solid fa-volume-high"></i> </button>
                     </div>
                 </div>
             </div>
